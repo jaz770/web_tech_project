@@ -8,6 +8,9 @@ export default function MovieCard({ movie, saved, watched, onToggleWatchlist }) 
         <div className="movie-meta"><span>{movie.year}</span><span>{movie.genre}</span></div>
         <h3><a href={`/movies/${movie.id}`}>{movie.title}</a></h3>
         <p className="director">Directed by {movie.director}</p>
+        <p className="card-rating">{movie.reviewCount > 0
+          ? <><span className="stars">★</span> <strong>{movie.avgRating.toFixed(1)}</strong> <span className="muted">({movie.reviewCount} {movie.reviewCount === 1 ? 'review' : 'reviews'})</span></>
+          : <span className="muted">No reviews yet</span>}</p>
         <p className="movie-description">{movie.description}</p>
         <div className="card-actions">
           <button className={`small-button${saved ? ' saved' : ''}`} type="button" onClick={() => onToggleWatchlist(movie.id)} aria-label={`${saved ? 'Remove' : 'Add'} ${movie.title} ${saved ? 'from' : 'to'} watchlist`}>

@@ -11,6 +11,7 @@ export default function Header({ currentPage, watchlistCount }) {
           <a className={`nav-link${currentPage === 'watchlist' ? ' active' : ''}`} href="/watchlist" aria-current={currentPage === 'watchlist' ? 'page' : undefined}>
             Watchlist <span className="nav-count">{watchlistCount}</span>
           </a>
+          <a className={`nav-link${currentPage === 'myreviews' ? ' active' : ''}`} href="/my-reviews" aria-current={currentPage === 'myreviews' ? 'page' : undefined}>My Reviews</a>
         </nav>
       </div>
     </header>

@@ -3,6 +3,7 @@ import Header from './components/Header.jsx';
 import DiscoverPage from './pages/DiscoverPage.jsx';
 import MovieDetailPage from './pages/MovieDetailPage.jsx';
 import WatchlistPage from './pages/WatchlistPage.jsx';
+import MyReviewsPage from './pages/MyReviewsPage.jsx';
 
 const storageKey = 'framelog-watchlist-v1';
 function readWatchlist() {
@@ -48,7 +49,7 @@ export default function App() {
 
   const path = window.location.pathname.replace(/\/$/, '') || '/';
   const detailMatch = /^\/movies\/(\d+)$/.exec(path);
-  const currentPage = path === '/' ? 'discover' : path === '/watchlist' ? 'watchlist' : detailMatch ? 'detail' : 'unknown';
+  const currentPage = path === '/' ? 'discover' : path === '/watchlist' ? 'watchlist' : path === '/my-reviews' ? 'myreviews' : detailMatch ? 'detail' : 'unknown';
   const movie = detailMatch ? movies.find((item) => item.id === Number(detailMatch[1])) : null;
   const entry = movie ? watchlist.find((item) => item.id === movie.id) : null;
 
@@ -58,6 +59,7 @@ export default function App() {
       : error ? <main className="container inner-page error-page"><h1>Could not load movies</h1><p>{error}</p><p>Make sure the API is running with <code>npm run dev</code>, then refresh this page.</p></main>
       : currentPage === 'discover' ? <DiscoverPage movies={movies} watchlist={watchlist} onToggleWatchlist={toggleWatchlist} />
       : currentPage === 'watchlist' ? <WatchlistPage movies={movies} watchlist={watchlist} onToggleWatchlist={toggleWatchlist} onSetWatched={setWatched} />
+      : currentPage === 'myreviews' ? <MyReviewsPage />
       : movie ? <MovieDetailPage movie={movie} saved={Boolean(entry)} watched={entry?.watched || false} onToggleWatchlist={toggleWatchlist} onSetWatched={setWatched} />
       : <main className="container inner-page error-page"><h1>Page not found</h1><p>There is no movie or page at this address.</p><a className="hero-link" href="/">Back to discover</a></main>}
     <footer className="site-footer"><div className="container"><span>FrameLog</span><span>A movie discovery project · Your watchlist is saved in this browser</span></div></footer>
