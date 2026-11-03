@@ -1,0 +1,32 @@
+// Hardcoded starter reviews so rating filters and sorting have data to work with.
+// Reviews are matched to movies by title and inserted once (marked with owner_id = 'seed').
+// Movies not listed here (for example Her, Minari, Nope) intentionally start with no reviews.
+export const seedReviews = [
+  ["Inception", "Aarav", 5, "Layered, clever and gorgeous to look at. The ending still has me arguing with friends.", "2026-09-02 10:15:00"],
+  ["Inception", "Meera", 4, "Great concept and a fantastic score. The exposition is a bit heavy in the first half.", "2026-09-05 18:40:00"],
+  ["Interstellar", "Rohan", 5, "The docking scene alone is worth it. Emotional and huge in scale.", "2026-09-03 20:05:00"],
+  ["Interstellar", "Kavya", 4, "Beautiful visuals and a moving father-daughter story, though the science talk gets dense.", "2026-09-08 12:30:00"],
+  ["Spirited Away", "Ishaan", 5, "Pure imagination. Every frame feels hand-made and the world is unforgettable.", "2026-09-01 09:00:00"],
+  ["Parasite", "Neha", 5, "Tense, funny and devastating. The tonal shifts are handled perfectly.", "2026-09-04 21:10:00"],
+  ["Parasite", "Vikram", 5, "A masterclass in storytelling. I noticed new details on my second watch.", "2026-09-10 16:45:00"],
+  ["Parasite", "Sana", 4, "Brilliant script and sharp social commentary. The second half is very intense.", "2026-09-12 19:20:00"],
+  ["The Grand Budapest Hotel", "Tanvi", 4, "Charming, symmetrical and full of quirky details. Wes Anderson at his most playful.", "2026-09-06 11:25:00"],
+  ["The Dark Knight", "Arjun", 5, "The Joker performance carries the whole film. Easily one of the best superhero movies.", "2026-09-02 22:00:00"],
+  ["The Dark Knight", "Priya", 5, "Dark, gripping and surprisingly thoughtful about chaos and order.", "2026-09-09 14:10:00"],
+  ["Arrival", "Dev", 4, "Quiet, clever sci-fi with a twist that genuinely lands emotionally.", "2026-09-07 17:35:00"],
+  ["Whiplash", "Ananya", 5, "I was gripping my seat during the final drum solo. Absolutely electric.", "2026-09-11 20:50:00"],
+  ["Whiplash", "Karan", 4, "Intense and uncomfortable in a good way. J.K. Simmons is terrifying.", "2026-09-13 13:15:00"],
+  ["Get Out", "Riya", 4, "Smart horror with a lot to say. The tension builds really well.", "2026-09-14 15:00:00"],
+  ["The Matrix", "Siddharth", 4, "Still holds up. The action was groundbreaking and the ideas are fun to think about.", "2026-09-15 10:40:00"],
+  ["Mad Max: Fury Road", "Zoya", 5, "Two hours of non-stop adrenaline with almost no wasted moment. Incredible stunt work.", "2026-09-16 19:30:00"],
+  ["Coco", "Mihir", 5, "Colorful, musical and it made me cry. Great for the whole family.", "2026-09-17 11:05:00"],
+  ["Coco", "Divya", 4, "Lovely music and a beautiful message about family and memory.", "2026-09-18 18:25:00"],
+  ["The Lighthouse", "Yash", 3, "Atmospheric and strange, but I found it a little too confusing for my taste.", "2026-09-19 21:45:00"],
+  ["Knives Out", "Pooja", 4, "A fun, twisty whodunit with a great cast. Very rewatchable.", "2026-09-20 16:20:00"],
+  ["The Social Network", "Rahul", 4, "Sharp dialogue and a great pace. Makes a board meeting feel like a thriller.", "2026-09-21 12:00:00"],
+  ["Oppenheimer", "Nisha", 4, "Powerful and well acted, though the runtime and three timelines take some focus.", "2026-09-22 20:15:00"],
+  ["Inside Out", "Aditya", 5, "Smart and emotional. It explains feelings better than most adult dramas do.", "2026-09-23 09:50:00"],
+  ["Little Women", "Shreya", 3, "Beautifully made and warm, but the jumping timeline lost me a little.", "2026-09-24 17:10:00"],
+  ["Dune", "Manav", 4, "Epic scale and stunning sound design. It feels like the first half of a story, though.", "2026-09-25 19:40:00"],
+  ["The Menu", "Tara", 3, "Great premise and strong performances, but the ending felt a bit rushed.", "2026-09-26 22:05:00"],
+];

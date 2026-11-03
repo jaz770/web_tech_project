@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import { formatDate, getOwnerId, getSavedName, saveName } from '../lib/owner.js';
 
 export default function MovieDetailPage({ movie, saved, watched, onToggleWatchlist, onSetWatched }) {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
-  const [name, setName] = useState('');
+  const [name, setName] = useState(getSavedName);
   const [rating, setRating] = useState('');
   const [body, setBody] = useState('');
   const [submitError, setSubmitError] = useState('');
@@ -12,7 +13,7 @@ export default function MovieDetailPage({ movie, saved, watched, onToggleWatchli
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch(`/api/movies/${movie.id}/reviews`, { signal: controller.signal })
+    fetch(`/api/movies/${movie.id}/reviews?owner=${encodeURIComponent(getOwnerId())}`, { signal: controller.signal })
       .then(async (response) => {
         if (!response.ok) throw new Error('Could not load reviews.');
         return response.json();
@@ -37,10 +38,11 @@ export default function MovieDetailPage({ movie, saved, watched, onToggleWatchli
       const response = await fetch(`/api/movies/${movie.id}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: cleanName, rating: Number(rating), body: cleanBody }),
+        body: JSON.stringify({ name: cleanName, rating: Number(rating), body: cleanBody, ownerId: getOwnerId() }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Could not save your review.');
+      saveName(cleanName);
       setReviews((current) => [data, ...current]);
       setBody('');
       setRating('');
@@ -70,12 +72,12 @@ export default function MovieDetailPage({ movie, saved, watched, onToggleWatchli
       </div>
 
       <section className="reviews-section" aria-labelledby="reviews-title">
-        <div className="section-heading"><div><p className="eyebrow">COMMUNITY NOTES</p><h2 id="reviews-title">Reviews</h2></div><span className="result-count">{reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}</span></div>
+        <div className="section-heading"><div><p className="eyebrow">COMMUNITY NOTES</p><h2 id="reviews-title">Reviews</h2></div><span className="result-count">{reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}{reviews.length ? ` · ${(reviews.reduce((sum, item) => sum + item.rating, 0) / reviews.length).toFixed(1)} ★ average` : ''}</span></div>
         <div className="reviews-layout">
           <div className="review-list" aria-live="polite">
             {loading ? <p className="muted">Loading reviews…</p> : loadError ? <p className="form-error" role="alert">{loadError}</p> : reviews.length ? reviews.map((review) => <article className="review" key={review.id}>
-              <div className="review-header"><strong>{review.name}</strong><span className="stars" aria-label={`${review.rating} out of 5 stars`}>{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</span></div>
-              <p>{review.body}</p><time dateTime={`${review.createdAt.replace(' ', 'T')}Z`}>{new Date(`${review.createdAt.replace(' ', 'T')}Z`).toLocaleDateString()}</time>
+              <div className="review-header"><strong>{review.name}{review.mine && <span className="you-badge">You</span>}</strong><span className="stars" aria-label={`${review.rating} out of 5 stars`}>{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</span></div>
+              <p>{review.body}</p><time dateTime={`${review.createdAt.replace(' ', 'T')}Z`}>{formatDate(review.createdAt)}</time>
             </article>) : <div className="empty-state compact"><p>No reviews yet. Be the first to share your thoughts.</p></div>}
           </div>
           <form className="review-form" onSubmit={submitReview}>
